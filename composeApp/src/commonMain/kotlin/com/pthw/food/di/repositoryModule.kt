@@ -1,5 +1,6 @@
 package com.pthw.food.di
 
+import com.pthw.food.data.cache.mappers.FoodMapper
 import com.pthw.food.data.cache.repository.CacheRepositoryImpl
 import com.pthw.food.data.cache.repository.FoodRepositoryImpl
 import com.pthw.food.domain.repository.CacheRepository
@@ -11,6 +12,7 @@ import org.koin.dsl.module
  */
 
 val repositoryModule = module {
-    factory<FoodRepository> { FoodRepositoryImpl(get()) }
+    factory<FoodMapper> { FoodMapper() }
+    factory<FoodRepository> { FoodRepositoryImpl(get(), get()) }
     factory<CacheRepository> { CacheRepositoryImpl(get()) }
 }

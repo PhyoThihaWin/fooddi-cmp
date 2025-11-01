@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		33142A049E68885CBEF4B1DE /* Pods_iosApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF7B46A3286A739540ACFBA /* Pods_iosApp.framework */; };
+		E92AA4C62EB5D0490036EB4C /* ic_launcher.icon in Resources */ = {isa = PBXBuildFile; fileRef = E92AA4C52EB5D0490036EB4C /* ic_launcher.icon */; };
 		E95942012EB49A460058DD0B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E95942002EB49A460058DD0B /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -16,6 +17,7 @@
 		21885CA68DCA4DD7127428E6 /* Pods-iosApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.debug.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.debug.xcconfig"; sourceTree = "<group>"; };
 		A44E42F62A2FF78A437E8E29 /* FoodDiMultiplatform.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodDiMultiplatform.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B50CA24F707C7C2D15C14FAE /* Pods-iosApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iosApp.release.xcconfig"; path = "Target Support Files/Pods-iosApp/Pods-iosApp.release.xcconfig"; sourceTree = "<group>"; };
+		E92AA4C52EB5D0490036EB4C /* ic_launcher.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = ic_launcher.icon; sourceTree = "<group>"; };
 		E95942002EB49A460058DD0B /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; name = "GoogleService-Info.plist"; path = "iosApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +71,7 @@
 		5640A17CB30320F3280A862C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E92AA4C52EB5D0490036EB4C /* ic_launcher.icon */,
 				E95942002EB49A460058DD0B /* GoogleService-Info.plist */,
 				1DF7B46A3286A739540ACFBA /* Pods_iosApp.framework */,
 			);
@@ -162,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E95942012EB49A460058DD0B /* GoogleService-Info.plist in Resources */,
+				E92AA4C62EB5D0490036EB4C /* ic_launcher.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,8 +287,9 @@
 			baseConfigurationReference = B50CA24F707C7C2D15C14FAE /* Pods-iosApp.release.xcconfig */;
 			buildSettings = {
 				ARCHS = arm64;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = ic_launcher;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -305,6 +310,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -389,8 +395,9 @@
 			baseConfigurationReference = 21885CA68DCA4DD7127428E6 /* Pods-iosApp.debug.xcconfig */;
 			buildSettings = {
 				ARCHS = arm64;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = ic_launcher;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = iosApp/iosApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -411,6 +418,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

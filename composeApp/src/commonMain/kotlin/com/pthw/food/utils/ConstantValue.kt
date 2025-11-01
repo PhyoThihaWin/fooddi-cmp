@@ -2,9 +2,12 @@ package com.pthw.food.utils
 
 import com.pthw.food.domain.model.AppThemeMode
 import com.pthw.food.domain.model.FilterType
+import com.pthw.food.domain.model.Localization
 import fooddimultiplatform.composeapp.generated.resources.*
 
 object ConstantValue {
+    val DEFAULT_LOCALE = Localization.Myanmar.code
+
     const val INTERSTITIAL_COUNT = 10
 
     const val IMAGE_PATH =

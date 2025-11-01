@@ -7,6 +7,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.pthw.food.domain.model.AppThemeMode
 import com.pthw.food.domain.model.Localization
 import com.pthw.food.domain.repository.CacheRepository
+import com.pthw.food.utils.ConstantValue.DEFAULT_LOCALE
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -24,13 +25,13 @@ class CacheRepositoryImpl(
 
     override fun getLanguageNormal(): String {
         return runBlocking {
-            dataStore.data.first()[PREF_KEY_LANGUAGE] ?: Localization.English.code
+            dataStore.data.first()[PREF_KEY_LANGUAGE] ?: DEFAULT_LOCALE
         }
     }
 
     override fun getLanguage(): Flow<String> {
         return dataStore.data.map {
-            it[PREF_KEY_LANGUAGE] ?: Localization.English.code
+            it[PREF_KEY_LANGUAGE] ?: DEFAULT_LOCALE
         }
     }
 
@@ -51,7 +52,6 @@ class CacheRepositoryImpl(
             it[PREF_KEY_THEME_MODE] ?: AppThemeMode.SYSTEM_DEFAULT
         }
     }
-
 
     override suspend fun putThemeMode(theme: String) {
         dataStore.edit {
