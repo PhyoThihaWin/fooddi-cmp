@@ -9,6 +9,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.googleServices)
+    alias(libs.plugins.crashlytics)
 }
 
 kotlin {
@@ -54,6 +55,8 @@ kotlin {
             implementation(libs.koin.androidx.compose)
             implementation(libs.ktor.client.okhttp)
 
+            implementation("androidx.core:core-splashscreen:1.0.1")
+
             implementation("androidx.annotation:annotation:1.9.1")
             implementation("com.facebook.android:audience-network-sdk:6.21.0") {
                 exclude("com.android.support", "support-compat")
@@ -90,6 +93,8 @@ kotlin {
             implementation(libs.androidx.sqlite.bundled)
 
             api("io.github.mirzemehdi:kmpnotifier:1.6.0")
+            implementation("dev.icerock.moko:permissions-compose:0.20.1")
+            implementation("dev.icerock.moko:permissions-notifications:0.20.1")
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)

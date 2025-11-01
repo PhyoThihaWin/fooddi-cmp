@@ -22,12 +22,8 @@
     <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
     <string name="request_notification_permission" translatable="false">Request permission</string>
     <string name="notification_permission_title" translatable="false">Notification</string>
-    <string name="notification_permission_description" translatable="false">The notification permission is important for
-        this app. Please grant the permission.
-    </string>
-    <string name="notification_permission_settings" translatable="false">The notification permission is important for
-        this app. Please navigate to your device settings and enable notifications for Make it So.
-    </string>
+    <string name="notification_permission_description" translatable="false">The notification permission is important for this app. Please grant the permission.</string>
+    <string name="notification_permission_settings" translatable="false">The notification permission is important for this app. Please navigate to your device settings and enable notifications for Make it So.</string>
     <!-- endregion -->
 
     <!-- region audience network ad -->

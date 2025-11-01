@@ -2,15 +2,12 @@ package com.pthw.food.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.platform.LocalInspectionMode
-import com.pthw.food.getPlatform
-import com.pthw.food.ui.theme.defaultFontFamily
+import com.pthw.food.expects.getPlatform
 
 private val LightColorScheme = lightColorScheme(
     primary = md_theme_light_primary,

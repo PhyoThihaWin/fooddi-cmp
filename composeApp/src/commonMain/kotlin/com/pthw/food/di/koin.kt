@@ -1,10 +1,8 @@
 package com.pthw.food.di
 
-import com.pthw.food.data.di.cacheModule
-import com.pthw.food.ui.AppViewModel
+import com.pthw.food.expects.cacheModule
 import com.pthw.food.ui.home.HomePageViewModel
 import org.koin.core.context.startKoin
-import org.koin.core.module.Module
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module

@@ -30,19 +30,18 @@ import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
-import com.mmk.kmpnotifier.notification.NotifierManager
-import com.pthw.food.LocalAppLocale
-import com.pthw.food.Logger
-import com.pthw.food.adview.MetaBanner
-import com.pthw.food.adview.MetaInterstitial
-import com.pthw.food.common.composable.CoilAsyncImage
-import com.pthw.food.common.composable.RadioSelectionDialog
-import com.pthw.food.common.composable.TitleTextView
+import com.pthw.food.expects.LocalAppLocale
+import com.pthw.food.expects.MetaBanner
+import com.pthw.food.expects.MetaInterstitial
+import com.pthw.food.ui.composable.CoilAsyncImage
+import com.pthw.food.ui.composable.RadioSelectionDialog
+import com.pthw.food.ui.composable.TitleTextView
 import com.pthw.food.domain.model.AppThemeMode
 import com.pthw.food.domain.model.FilterType
 import com.pthw.food.domain.model.Food
 import com.pthw.food.domain.model.Localization
-import com.pthw.food.getPlatform
+import com.pthw.food.expects.Orientation
+import com.pthw.food.expects.getPlatform
 import com.pthw.food.ui.theme.ColorPrimary
 import com.pthw.food.ui.theme.Dimens
 import com.pthw.food.ui.theme.FoodDiAppTheme
@@ -50,9 +49,7 @@ import com.pthw.food.ui.theme.Shapes
 import com.pthw.food.utils.ConstantValue
 import fooddimultiplatform.composeapp.generated.resources.*
 import io.github.alexzhirkevich.compottie.*
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import org.jetbrains.compose.resources.StringResource
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -65,69 +62,23 @@ import org.koin.compose.viewmodel.koinViewModel
 fun HomePage() {
     val viewModel = koinViewModel<HomePageViewModel>()
 
-    HomePageContent(
-        UiState(
-            themeCode = viewModel.appThemeMode.value,
-            localeCode = viewModel.currentLanguage.value,
-            pageTitle = viewModel.pageTitle.value,
-            foods = viewModel.foods.value
-        )
-    ) {
-        when (it) {
-            is UiEvent.SearchFoods -> {
-                viewModel.updateClickCountAd()
-                viewModel.updateSearchQuery(it.search)
-            }
-
-            is UiEvent.FilterFoods -> {
-                viewModel.updateClickCountAd()
-                if (it.filterType.type == null) {
-                    viewModel.getAllFoods()
-                } else {
-                    viewModel.getFoodsByType(it.filterType)
-                }
-            }
-
-            is UiEvent.ChangeLanguage -> {
-                viewModel.updateClickCountAd()
-                viewModel.updateLanguageCache(it.localeCode)
-            }
-
-            is UiEvent.ChangeThemeMode -> {
-                viewModel.updateClickCountAd()
-                viewModel.updateCachedThemeMode(it.theme)
-            }
-        }
-    }
+    HomePageContent(viewModel.state.value, viewModel::onEvent)
 
     // interstitial ad
-    if (viewModel.clickCountForAd.intValue > ConstantValue.INTERSTITIAL_COUNT) {
+    if (viewModel.state.value.clickCountForAd > ConstantValue.INTERSTITIAL_COUNT) {
         LocalFocusManager.current.clearFocus()
         MetaInterstitial {
-            viewModel.updateClickCountAd(true)
+            viewModel.onEvent(UiEvent.ResetClickCountAd)
         }
     }
 }
 
-private data class UiState(
-    val themeCode: String,
-    val localeCode: String,
-    val pageTitle: StringResource = Res.string.app_name,
-    val foods: List<Food> = emptyList()
-)
-
-private sealed class UiEvent {
-    class SearchFoods(val search: String) : UiEvent()
-    class FilterFoods(val filterType: FilterType) : UiEvent()
-    class ChangeLanguage(val localeCode: String) : UiEvent()
-    class ChangeThemeMode(val theme: String) : UiEvent()
-}
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
 private fun HomePageContent(
     uiState: UiState,
-    onAction: (UiEvent) -> Unit = {}
+    onEvent: (UiEvent) -> Unit = {}
 ) {
     val isDarkMode = AppThemeMode.isDarkMode(uiState.themeCode)
     val coroutineScope = rememberCoroutineScope()
@@ -169,7 +120,7 @@ private fun HomePageContent(
                             modifier = Modifier
                                 .layoutId("background")
                                 .fillMaxWidth()
-                                .fillMaxHeight(if (getPlatform().getCurrentOrientation() == com.pthw.food.Orientation.Portrait) 0.18f else 0.28f)
+                                .fillMaxHeight(if (getPlatform().getCurrentOrientation() == Orientation.Portrait) 0.18f else 0.28f)
                                 .background(color = if (isDarkMode) MaterialTheme.colorScheme.background else ColorPrimary)
                         )
 
@@ -236,7 +187,7 @@ private fun HomePageContent(
                                 }
                             },
                             onValueChange = {
-                                onAction(UiEvent.SearchFoods(it))
+                                onEvent(UiEvent.SearchFoods(it))
                             }
                         )
 
@@ -245,7 +196,7 @@ private fun HomePageContent(
                             isShow = showFilterDialog,
                             onDismissRequest = {
                                 it?.let {
-                                    onAction(UiEvent.FilterFoods(it))
+                                    onEvent(UiEvent.FilterFoods(it))
                                 }
                                 showFilterDialog = false
                             }
@@ -262,7 +213,7 @@ private fun HomePageContent(
                             localeCode = uiState.localeCode
                         ) {
                             it?.let {
-                                onAction(UiEvent.ChangeLanguage(it.code))
+                                onEvent(UiEvent.ChangeLanguage(it.code))
                             }
                             showLanguageDialog = false
                         }
@@ -273,7 +224,7 @@ private fun HomePageContent(
                             themeCode = uiState.themeCode
                         ) {
                             it?.let {
-                                onAction(UiEvent.ChangeThemeMode(it.themeCode))
+                                onEvent(UiEvent.ChangeThemeMode(it.themeCode))
                             }
                             showThemeDialog = false
                         }

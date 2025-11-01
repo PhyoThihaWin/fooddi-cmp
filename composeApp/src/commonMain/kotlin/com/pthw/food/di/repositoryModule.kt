@@ -1,8 +1,8 @@
 package com.pthw.food.di
 
-import com.pthw.food.data.cache.mappers.FoodMapper
-import com.pthw.food.data.cache.repository.CacheRepositoryImpl
-import com.pthw.food.data.cache.repository.FoodRepositoryImpl
+import com.pthw.food.data.mappers.FoodMapper
+import com.pthw.food.data.repository.CacheRepositoryImpl
+import com.pthw.food.data.repository.FoodRepositoryImpl
 import com.pthw.food.domain.repository.CacheRepository
 import com.pthw.food.domain.repository.FoodRepository
 import org.koin.dsl.module
