@@ -37,20 +37,6 @@ class AndroidPlatform(override val type: PlatformType = PlatformType.Android) : 
         }
     }
 
-    @Composable
-    override fun setSystemBarTheme(darkTheme: Boolean) {
-        val view = LocalView.current
-        SideEffect {
-            val window = (view.context as Activity).window
-            window.statusBarColor =
-                if (darkTheme) md_theme_dark_background.toArgb() else ColorPrimary.toArgb()
-            window.navigationBarColor =
-                if (darkTheme) md_theme_dark_surface.toArgb() else md_theme_light_surface.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
-            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = !darkTheme
-        }
-    }
-
     override fun initKmpNotifier() {
         NotifierManager.initialize(
             configuration = NotificationPlatformConfiguration.Android(

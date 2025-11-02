@@ -46,6 +46,7 @@ import com.pthw.food.ui.theme.ColorPrimary
 import com.pthw.food.ui.theme.Dimens
 import com.pthw.food.ui.theme.FoodDiAppTheme
 import com.pthw.food.ui.theme.Shapes
+import com.pthw.food.ui.theme.md_theme_dark_background
 import com.pthw.food.utils.ConstantValue
 import fooddimultiplatform.composeapp.generated.resources.*
 import io.github.alexzhirkevich.compottie.*
@@ -104,7 +105,11 @@ private fun HomePageContent(
     ) {
         key(uiState.localeCode) {
             Scaffold {
-                Box(modifier = Modifier.padding(it)) {
+                Box(
+                    modifier = Modifier
+                        .background(if (isDarkMode) md_theme_dark_background else ColorPrimary)
+                        .padding(top = it.calculateTopPadding())
+                ) {
                     // Main layout
                     MotionLayout(
                         modifier = Modifier

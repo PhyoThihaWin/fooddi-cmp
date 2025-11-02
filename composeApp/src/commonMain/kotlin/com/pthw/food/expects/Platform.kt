@@ -23,9 +23,6 @@ interface Platform {
     @Composable
     fun getCurrentOrientation(): Orientation
 
-    @Composable
-    fun setSystemBarTheme(darkTheme: Boolean)
-
     fun initKmpNotifier()
 }
 

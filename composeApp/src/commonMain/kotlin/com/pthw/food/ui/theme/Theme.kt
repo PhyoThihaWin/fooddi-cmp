@@ -80,10 +80,6 @@ fun FoodDiAppTheme(
     content: @Composable () -> Unit
 ) {
 
-    if (!LocalInspectionMode.current) {
-        getPlatform().setSystemBarTheme(darkTheme)
-    }
-
     val colorScheme = if (darkTheme) DarkColorScheme else LightColorScheme
 
     MaterialTheme(
