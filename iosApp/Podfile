@@ -7,7 +7,7 @@ target 'iosApp' do
 
   # Pods for iosApp
     pod 'composeApp', :path => '../composeApp'
-    pod 'FBAudienceNetwork', '6.21.0'
+    pod 'FBAudienceNetwork'
     pod 'FirebaseAnalytics'
     pod 'FirebaseCrashlytics'
     pod 'FirebaseMessaging'
