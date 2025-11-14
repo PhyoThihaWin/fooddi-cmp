@@ -23,6 +23,7 @@ ksp = "2.2.21-2.0.4"
 google-services-plugin = "4.4.4"
 google-firebase-crashlytics = "3.0.6"
 firebase-bom = "34.4.0"
+sonner = "0.4.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -55,6 +56,7 @@ android-firebase-bom = { module = "com.google.firebase:firebase-bom", version.re
 android-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 android-firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
 android-firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
+sonner = { module = "io.github.brdominguez:compose-sonner", version.ref = "sonner" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

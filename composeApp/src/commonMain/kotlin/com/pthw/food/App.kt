@@ -7,6 +7,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import com.dokar.sonner.ToastType
+import com.dokar.sonner.Toaster
+import com.dokar.sonner.rememberToasterState
 import com.mmk.kmpnotifier.notification.NotifierManager
 import com.pthw.food.ui.composable.PermissionDialog
 import com.pthw.food.domain.model.AppThemeMode
@@ -52,6 +55,7 @@ fun RequestNotificationPermission() {
     val controller: PermissionsController = remember(factory) { factory.createPermissionsController() }
     val coroutineScope: CoroutineScope = rememberCoroutineScope()
     var isGranted by remember { mutableStateOf<Boolean?>(null) }
+    val toaster = rememberToasterState()
 
     BindEffect(controller)
 
@@ -62,8 +66,17 @@ fun RequestNotificationPermission() {
     if (isGranted == false) {
         PermissionDialog {
             coroutineScope.launch {
-                controller.providePermission(Permission.REMOTE_NOTIFICATION)
+                try {
+                    controller.providePermission(Permission.REMOTE_NOTIFICATION)
+                } catch (e: Exception) {
+                    Logger.e(e.message.orEmpty(), e)
+                    toaster.show(
+                        message = "Failed to request notification permission. Please allow the notification in setting.",
+                        type = ToastType.Normal,
+                    )
+                }
             }
         }
+        Toaster(state = toaster)
     }
 }

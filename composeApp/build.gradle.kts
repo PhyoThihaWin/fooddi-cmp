@@ -95,6 +95,8 @@ kotlin {
             api("io.github.mirzemehdi:kmpnotifier:1.6.0")
             implementation("dev.icerock.moko:permissions-compose:0.20.1")
             implementation("dev.icerock.moko:permissions-notifications:0.20.1")
+
+            implementation(libs.sonner)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
