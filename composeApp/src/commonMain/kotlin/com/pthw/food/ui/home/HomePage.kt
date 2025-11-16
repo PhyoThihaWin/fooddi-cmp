@@ -41,6 +41,7 @@ import com.pthw.food.domain.model.FilterType
 import com.pthw.food.domain.model.Food
 import com.pthw.food.domain.model.Localization
 import com.pthw.food.expects.Orientation
+import com.pthw.food.expects.PlatformType
 import com.pthw.food.expects.getPlatform
 import com.pthw.food.ui.theme.ColorPrimary
 import com.pthw.food.ui.theme.Dimens
@@ -48,6 +49,7 @@ import com.pthw.food.ui.theme.FoodDiAppTheme
 import com.pthw.food.ui.theme.Shapes
 import com.pthw.food.ui.theme.md_theme_dark_background
 import com.pthw.food.utils.ConstantValue
+import com.pthw.food.utils.ext.go
 import fooddimultiplatform.composeapp.generated.resources.*
 import io.github.alexzhirkevich.compottie.*
 import kotlinx.coroutines.launch
@@ -238,12 +240,11 @@ private fun HomePageContent(
                         SettingModalSheet(showSheet) {
                             showSheet = false
                             when (it) {
-                                0 -> showLanguageDialog = true
-                                1 -> showThemeDialog = true
-                                2 -> showAboutAppDialog = true
-                                3 -> {
-                                    uriHandler.openUri("https://play.google.com/store/apps/dev?id=5729357381500909341")
-                                }
+                                1 -> showLanguageDialog = true
+                                2 -> showThemeDialog = true
+                                3 -> showAboutAppDialog = true
+                                4 -> uriHandler.go(ConstantValue.citationUrl)
+                                5 -> uriHandler.go(ConstantValue.moreAppUrl)
                             }
                         }
 
@@ -512,7 +513,7 @@ private fun HomeSearchBarView(
 @Composable
 private fun SettingModalSheet(
     isShow: Boolean,
-    onDismiss: (index: Int) -> Unit
+    onDismiss: (id: Int) -> Unit
 ) {
     if (!isShow) return
     val modalBottomSheetState = rememberModalBottomSheetState()
@@ -529,22 +530,29 @@ private fun SettingModalSheet(
 
         Spacer(modifier = Modifier.height(Dimens.MARGIN_MEDIUM_2))
 
-        ConstantValue.settingList.forEachIndexed { index, pair ->
+        // manipulate setting items
+        val settings = ConstantValue.settingList.toMutableList()
+        if (getPlatform().type == PlatformType.iOS) {
+            settings.removeAll { it.id == 3 }
+        }
+
+        settings.forEachIndexed { index, item ->
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .clickable { onDismiss(index) }
+                    .clickable { onDismiss(item.id) }
                     .padding(horizontal = Dimens.MARGIN_20),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Icon(
-                    painter = painterResource(pair.first),
+                    modifier = Modifier.width(40.dp),
+                    painter = painterResource(item.icon),
                     contentDescription = "",
                 )
                 Spacer(modifier = Modifier.width(Dimens.MARGIN_MEDIUM))
                 Text(
-                    text = stringResource(pair.second),
+                    text = stringResource(item.title),
                     modifier = Modifier.padding(16.dp),
                 )
             }

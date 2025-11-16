@@ -13,6 +13,7 @@
     <string name="chooseLanguage">Choose Language</string>
     <string name="chooseThemeMode">Dark Mode</string>
     <string name="aboutApp">About App</string>
+    <string name="citation">Citation Information</string>
     <string name="moreApp">More Applications</string>
     <string name="system_default_mode">System Default</string>
     <string name="light_mode">Dark Mode OFF</string>
